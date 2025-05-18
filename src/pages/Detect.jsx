@@ -62,7 +62,7 @@ export default function Detect() {
     formData.append("file", selectedImage);
 
     try {
-      const response = await fetch("https://skinburn-backend-production.up.railway.app", {
+      const response = await fetch("https://skinburn-backend-production.up.railway.app/predict", {
         method: "POST",
         body: formData,
         // No need to set Content-Type header for FormData, browser handles it automatically
