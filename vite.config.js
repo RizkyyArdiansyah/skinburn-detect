@@ -7,14 +7,5 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
-  server: {
-    proxy: {
-      // Proxy endpoint ke backend FastAPI
-      '/predict': {
-        target: 'http://localhost:8000',
-        changeOrigin: true,
-        secure: false,
-      }
-    }
-  }
+
 })
