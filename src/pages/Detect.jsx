@@ -23,7 +23,7 @@ export default function Detect() {
   const handleDrop = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    
+
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
       const file = e.dataTransfer.files[0];
       if (file.type.startsWith('image/')) {
@@ -34,7 +34,7 @@ export default function Detect() {
         });
         setError(null);
       } else {
-        setError("Please upload an image file (JPG, PNG, JPEG)");
+        setError("Silakan unggah file gambar (JPG, PNG, JPEG)");
       }
     }
   };
@@ -53,10 +53,10 @@ export default function Detect() {
 
   const handleDetect = async () => {
     if (!selectedImage) return;
-    
+
     setIsLoading(true);
     setError(null);
-    
+
     // Create FormData object to send the image
     const formData = new FormData();
     formData.append("file", selectedImage);
@@ -76,7 +76,7 @@ export default function Detect() {
       setResult(data);
     } catch (err) {
       console.error("Error detecting burn:", err);
-      setError(err.message || "Failed to detect burn. Please try again.");
+      setError(err.message || "Gagal mendeteksi luka bakar. Silakan coba lagi.");
     } finally {
       setIsLoading(false);
     }
@@ -85,7 +85,7 @@ export default function Detect() {
   // Helper function to determine burn degree from detections
   const getBurnDegree = () => {
     if (!result || !result.detections || result.detections.length === 0) {
-      return "Unknown";
+      return "Tidak Diketahui";
     }
 
     // Sort by confidence and get the highest one
@@ -97,37 +97,54 @@ export default function Detect() {
   const getBurnDescription = (degree) => {
     switch (degree.toLowerCase()) {
       case "first-degree":
-        return "First-Degree burns affect only the outer layer of skin. The burn site is red, painful, dry, and with no blisters.";
+        return "Luka bakar derajat pertama hanya mempengaruhi lapisan luar kulit. Area luka tampak merah, nyeri, kering, dan tanpa lepuhan.";
       case "second-degree":
-        return "Second-Degree burns involve the outer layer and part of the lower layer of skin. The burn site appears red, blistered, swollen, and painful.";
+        return "Luka bakar derajat kedua melibatkan lapisan luar dan sebagian lapisan bawah kulit. Area luka tampak merah, melepuh, bengkak, dan nyeri.";
       case "third-degree":
-        return "Third-Degree burns destroy all layers of skin. The burned area can look white or charred. These burns may cause little or no pain if nerves are damaged.";
+        return "Luka bakar derajat ketiga merusak semua lapisan kulit. Area yang terbakar dapat tampak putih atau hangus. Luka ini mungkin tidak terasa sakit jika saraf rusak.";
       case "forth-degree":
-        return "Forth-Degree burns extend beyond the skin into tendons, muscles, and bones. The burned area may appear blackened or charred.";
+        return "Luka bakar derajat keempat meluas melampaui kulit hingga ke tendon, otot, dan tulang. Area yang terbakar mungkin tampak menghitam atau hangus.";
       default:
-        return "No clear burn pattern detected. Please consult a medical professional for proper diagnosis.";
+        return "Tidak terdeteksi pola luka bakar yang jelas. Silakan konsultasikan dengan tenaga medis profesional untuk diagnosis yang tepat.";
     }
   };
 
   return (
-    <section id="diagnose" className="min-h-screen flex py-20 justify-center bg-white px-4">
-      <div className="w-full max-w-md text-center select-none">
-        <h1 data-aos="zoom-in" data-aos-duration="800" className="text-4xl font-bold mb-2">Burn <span className="text-blue-600">Alyze</span></h1>
-        <p data-aos="zoom-in" data-aos-duration="800" className="text-lg text-gray-600 mb-6">
-          Detect and classify burn severity levels.
+    <section id="diagnose" className="min-h-screen flex py-20 justify-center px-4 relative overflow-hidden">
+      {/* Animated Background - Melanjutkan dari section edukasi */}
+      <div className="absolute inset-0 -z-10">
+        {/* Gradient Background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-white from-20% via-orange-200 to-blue-50"></div>
+
+        {/* Subtle Grid Pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="h-full w-full" style={{
+            backgroundImage: `
+              linear-gradient(90deg, #000 1px, transparent 1px),
+              linear-gradient(180deg, #000 1px, transparent 1px)
+            `,
+            backgroundSize: '50px 50px'
+          }}></div>
+        </div>
+      </div>
+
+      <div className="w-full max-w-md text-center select-none relative">
+        <h1 data-aos="zoom-in" data-aos-duration="800" className="text-4xl font-bold mb-2">Burn <span className="text-amber-600">Alyze</span></h1>
+        <p data-aos="zoom-in" data-aos-duration="800" className="text-lg text-gray-900 mb-6">
+          Deteksi dan klasifikasi tingkat keparahan luka bakar.
         </p>
 
-        <div data-aos="fade-up" data-aos-duration="800" data-aos-delay="100" className="text-left mb-2 font-medium">Skin Image</div>
+        <div data-aos="fade-up" data-aos-duration="800" data-aos-delay="100" className="text-left mb-2 font-medium">Gambar Kulit</div>
         <div data-aos="fade-up" data-aos-duration="800" data-aos-delay="100"
-          className="border-2 border-dashed border-blue-400 rounded-xl p-4 mb-2 relative"
+          className="border-2 border-dashed border-blue-400 rounded-xl p-4 mb-2 relative bg-white/80 backdrop-blur-sm"
           onDrop={handleDrop}
           onDragOver={handleDragOver}
         >
           <div data-aos="fade-up" data-aos-duration="800" data-aos-delay="100" className="flex flex-col items-center space-y-2">
-            <div className="text-gray-700">Drag and drop file here</div>
-            <div className="text-sm text-gray-400">Limit 200MB per file • JPG, PNG, JPEG</div>
+            <div className="text-gray-700">Seret dan lepas file di sini</div>
+            <div className="text-sm text-gray-400">Batas 200MB per file • JPG, PNG, JPEG</div>
             <label className="border-2 border-dashed border-blue-400 px-4 py-1 rounded-lg mt-2 cursor-pointer hover:bg-blue-500 hover:text-slate-50 transition">
-              Browse files
+              Pilih file
               <input
                 type="file"
                 accept="image/*"
@@ -140,12 +157,12 @@ export default function Detect() {
 
         {/* Error message */}
         {error && (
-          <div className="text-red-500 text-sm mb-2">{error}</div>
+          <div className="text-red-500 text-sm mb-2 bg-red-50/80 backdrop-blur-sm p-2 rounded-lg">{error}</div>
         )}
 
         {/* File Info Preview */}
         {fileInfo && (
-          <div className="flex items-center justify-between border border-slate-50 rounded-md px-4 py-2 mb-2">
+          <div className="flex items-center justify-between border border-slate-200 bg-white/80 backdrop-blur-sm rounded-md px-4 py-2 mb-2">
             <div className="flex items-center space-x-2 text-gray-700">
               <svg
                 className="w-5 h-5 text-black"
@@ -168,52 +185,60 @@ export default function Detect() {
           </div>
         )}
 
-        <button data-aos="fade-up" data-aos-duration="800" 
+        <button data-aos="fade-up" data-aos-duration="800"
           onClick={handleDetect}
           disabled={!selectedImage || isLoading}
-          className="bg-black text-white w-full py-3 mt-2 rounded-xl text-lg font-medium shadow-lg hover:bg-blue-700 disabled:opacity-50 cursor-pointer"
+          className="bg-black text-white w-full py-3 mt-2 rounded-xl text-lg font-medium shadow-lg hover:bg-blue-700 disabled:opacity-50 cursor-pointer transition-all duration-300"
         >
-          {isLoading ? "Processing..." : "Identification"}
+          {isLoading ? "Memproses..." : "Identifikasi"}
         </button>
 
         {/* Results displayed below button */}
         {result && (
-          <div className="mt-6 border border-blue-700 rounded-xl p-4 text-left">
-            <h2 className="text-xl font-semibold mb-4 text-center">Result</h2>
-            
+          <div className="mt-6 border border-blue-700 rounded-xl p-4 text-left bg-white/90 backdrop-blur-sm shadow-lg">
+            <h2 className="text-xl font-semibold mb-4 text-center">Hasil Diagnosa</h2>
+
             <div className="mb-4 flex justify-center">
-              <img 
-                src={`https://skinburn-backend-production.up.railway.app${result.result_image}`} 
-                alt="Detection Result" 
+              <img
+                src={`https://skinburn-backend-production.up.railway.app${result.result_image}`}
+                alt="Hasil Deteksi"
                 className="max-w-full h-auto rounded-lg border border-gray-200"
               />
             </div>
-            
+
             <div className="space-y-2 mb-4">
               <p className="text-gray-700">
                 <span className="font-bold">Diagnosis:</span> {getBurnDegree()}
               </p>
-              
+
               <p className="text-gray-700 text-sm">
                 {getBurnDescription(getBurnDegree())}
               </p>
-              
+
               {result.detections && result.detections.length > 0 && (
                 <div className="text-sm text-gray-600 mt-2">
-                  <p className="font-medium">Detected burns:</p>
+                  <p className="font-medium">Luka bakar yang terdeteksi:</p>
                   <ul className="list-disc pl-5 mt-1">
                     {result.detections.map((detection, index) => (
                       <li key={index}>
-                        {detection.label}: {detection.confidence}% confidence
+                        {detection.label}: {detection.confidence}% kepercayaan
                       </li>
                     ))}
                   </ul>
                 </div>
               )}
             </div>
+
+            {/* Disclaimer untuk hasil diagnosa */}
+            <div className="mt-4 p-3 bg-yellow-50/80 backdrop-blur-sm border-l-4 border-yellow-400 rounded">
+              <p className="text-yellow-800 text-xs">
+                <strong>Peringatan:</strong> Hasil ini hanya untuk referensi dan tidak menggantikan diagnosis medis profesional. Selalu konsultasikan dengan dokter untuk penanganan yang tepat.
+              </p>
+            </div>
           </div>
         )}
       </div>
+
     </section>
   );
 }
