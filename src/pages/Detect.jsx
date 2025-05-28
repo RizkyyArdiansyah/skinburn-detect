@@ -134,7 +134,7 @@ export default function Detect() {
           Deteksi dan klasifikasi tingkat keparahan luka bakar.
         </p>
 
-        <div data-aos="fade-up" data-aos-duration="800" data-aos-delay="100" className="text-left mb-2 font-medium">Gambar Kulit</div>
+        <div data-aos="fade-up" data-aos-duration="800" data-aos-delay="100" className="text-left mb-2 font-medium">Gambar Luka</div>
         <div data-aos="fade-up" data-aos-duration="800" data-aos-delay="100"
           className="border-2 border-dashed border-blue-400 rounded-xl p-4 mb-2 relative bg-white/80 backdrop-blur-sm"
           onDrop={handleDrop}
@@ -142,7 +142,7 @@ export default function Detect() {
         >
           <div data-aos="fade-up" data-aos-duration="800" data-aos-delay="100" className="flex flex-col items-center space-y-2">
             <div className="text-gray-700">Seret dan lepas file di sini</div>
-            <div className="text-sm text-gray-400">Batas 200MB per file • JPG, PNG, JPEG</div>
+            <div className="text-sm text-gray-400">Batas 100MB per file • JPG, PNG, JPEG</div>
             <label className="border-2 border-dashed border-blue-400 px-4 py-1 rounded-lg mt-2 cursor-pointer hover:bg-blue-500 hover:text-slate-50 transition">
               Pilih file
               <input
