@@ -62,7 +62,7 @@ export default function Detect() {
     formData.append("file", selectedImage);
 
     try {
-      const response = await fetch("https://skinburn-backend-production.up.railway.app/predict", {
+      const response = await fetch("https://huggingface.co/spaces/RizkyAA/PojokKyy/predict", {
         method: "POST",
         body: formData,
         // No need to set Content-Type header for FormData, browser handles it automatically
@@ -200,7 +200,7 @@ export default function Detect() {
 
             <div className="mb-4 flex justify-center">
               <img
-                src={`https://skinburn-backend-production.up.railway.app${result.result_image}`}
+                src={`https://huggingface.co/spaces/RizkyAA/PojokKyy${result.result_image}`}
                 alt="Hasil Deteksi"
                 className="max-w-full h-auto rounded-lg border border-gray-200"
               />
