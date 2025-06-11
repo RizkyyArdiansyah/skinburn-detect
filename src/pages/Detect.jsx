@@ -7,9 +7,18 @@ export default function Detect() {
   const [result, setResult] = useState(null);
   const [error, setError] = useState(null);
 
+  const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB dalam byte
+
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
+      if (file.size > MAX_FILE_SIZE) {
+        setError("Ukuran file maksimal 10 MB");
+        setSelectedImage(null);
+        setFileInfo(null);
+        return;
+      }
+
       setSelectedImage(file);
       setFileInfo({
         name: file.name,
@@ -26,18 +35,28 @@ export default function Detect() {
 
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
       const file = e.dataTransfer.files[0];
-      if (file.type.startsWith('image/')) {
-        setSelectedImage(file);
-        setFileInfo({
-          name: file.name,
-          size: (file.size / (1024 * 1024)).toFixed(1), // MB
-        });
-        setError(null);
-      } else {
+
+      if (!file.type.startsWith('image/')) {
         setError("Silakan unggah file gambar (JPG, PNG, JPEG)");
+        return;
       }
+
+      if (file.size > MAX_FILE_SIZE) {
+        setError("Ukuran file maksimal 10 MB");
+        setSelectedImage(null);
+        setFileInfo(null);
+        return;
+      }
+
+      setSelectedImage(file);
+      setFileInfo({
+        name: file.name,
+        size: (file.size / (1024 * 1024)).toFixed(1), // MB
+      });
+      setError(null);
     }
   };
+
 
   const handleDragOver = (e) => {
     e.preventDefault();
@@ -110,7 +129,7 @@ export default function Detect() {
   };
 
   return (
-    <section id="diagnose" className="min-h-screen flex py-20 justify-center px-4 relative overflow-hidden">
+    <section id="diagnose" className="min-h-screen flex py-34 justify-center px-4 relative overflow-hidden">
       {/* Animated Background - Melanjutkan dari section edukasi */}
       <div className="absolute inset-0 -z-10">
         {/* Gradient Background */}
@@ -142,7 +161,7 @@ export default function Detect() {
         >
           <div data-aos="fade-up" data-aos-duration="800" data-aos-delay="100" className="flex flex-col items-center space-y-2">
             <div className="text-gray-700">Seret dan lepas file di sini</div>
-            <div className="text-sm text-gray-400">Batas 100MB per file • JPG, PNG, JPEG</div>
+            <div className="text-sm text-gray-400">Batas 10MB per file • JPG, PNG, JPEG</div>
             <label className="border-2 border-dashed border-blue-400 px-4 py-1 rounded-lg mt-2 cursor-pointer hover:bg-blue-500 hover:text-slate-50 transition">
               Pilih file
               <input

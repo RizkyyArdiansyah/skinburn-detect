@@ -5,6 +5,7 @@ import Footer from "./components/footer"
 import Home from "./pages/Home";
 import Detect from "./pages/Detect";
 import Educate from "./pages/Educate"
+import Profile from "./pages/Profile"
 import LoadingScreen from "./components/Loading";
 
 
@@ -15,7 +16,7 @@ function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 1900); 
+    }, 1900);
 
     return () => clearTimeout(timer);
   }, []);
@@ -24,7 +25,7 @@ function App() {
   useEffect(() => {
     AOS.init({
       duration: 1000,
-      once: false,   
+      once: false,
     });
   }, []);
 
@@ -34,7 +35,7 @@ function App() {
       // Delay untuk memastikan DOM sudah ter-render sempurna
       const initTimer = setTimeout(() => {
         AOS.refresh();
-        
+
         // Force refresh untuk mobile
         if (window.innerWidth <= 768) {
           setTimeout(() => {
@@ -85,6 +86,7 @@ function App() {
             <Home />
             <Educate />
             <Detect />
+            <Profile />
           </main>
           <Footer />
         </>

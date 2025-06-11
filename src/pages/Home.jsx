@@ -10,7 +10,7 @@ export default function Home() {
   };
 
   return (
-    <section id="home" className="scroll pt-24 min-h-[100dvh] relative overflow-hidden">
+    <section id="home" className="scroll py-34 min-h-[100dvh] relative overflow-hidden">
       {/* Animated Background */}
       <div className="absolute inset-0 -z-10">
         {/* Gradient Background */}
@@ -31,7 +31,7 @@ export default function Home() {
             <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
           </svg>
           <svg
-            className="absolute w-20 h-16 text-red-500/50 bottom-[15%] md:bottom-[25%] left-[40%] md:left-[30%] animate-pulse"
+            className="absolute w-20 h-16 text-red-500/50 bottom-[15%] md:bottom-[45%] left-[40%] md:left-[30%] animate-pulse"
             fill="currentColor"
             viewBox="0 0 24 24"
           >
