@@ -49,7 +49,6 @@ export default function Navbar() {
               <button onClick={() => scrollToSection("home")} className="text-black cursor-pointer font-medium text-sm hover:text-brown">Home</button>
               <button onClick={() => scrollToSection("edukasi")} className="text-sm text-black cursor-pointer font-medium hover:text-brown">Edukasi</button>
               <button onClick={() => scrollToSection("diagnose")} className="text-black cursor-pointer font-medium text-sm hover:text-brown">Deteksi</button>
-              <button onClick={() => scrollToSection("profile")} className="text-black cursor-pointer font-medium text-sm hover:text-brown">Profile</button>
             </div>
           </div>
 
@@ -78,8 +77,7 @@ export default function Navbar() {
           <div className="md:hidden mt-3 pb-3 space-y-5 py-5 flex flex-col text-center items-center font-medium">
             <button onClick={() => scrollToSection("home")} className="text-black cursor-pointer font-medium text-sm hover:text-brown">Home</button>
             <button onClick={() => scrollToSection("edukasi")} className="text-sm text-black cursor-pointer font-medium hover:text-brown">Edukasi</button>
-            <button onClick={() => scrollToSection("diagnose")} className="text-black cursor-pointer font-medium text-sm hover:text-brown">Deteksi</button>
-            <button onClick={() => scrollToSection("profile")} className="text-black cursor-pointer font-medium text-sm hover:text-brown">Profile</button>
+            <button onClick={() => scrollToSection("diagnose")} className="text-black cursor-pointer font-medium text-sm hover:text-brown">Deteksi</button> 
           </div>
         )}
       </div>

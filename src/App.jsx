@@ -5,7 +5,6 @@ import Footer from "./components/footer"
 import Home from "./pages/Home";
 import Detect from "./pages/Detect";
 import Educate from "./pages/Educate"
-import Profile from "./pages/Profile"
 import LoadingScreen from "./components/Loading";
 
 
@@ -86,7 +85,6 @@ function App() {
             <Home />
             <Educate />
             <Detect />
-            <Profile />
           </main>
           <Footer />
         </>
